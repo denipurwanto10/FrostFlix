@@ -1,0 +1,61 @@
+# Dependencies
+node_modules/
+/*.local
+
+# Dependencies build output
+dist/
+/*.cache
+
+# TypeScript build results
+*.tsbuildinfo
+*.tsbuildinfo.old
+
+# IDE
+.vscode/
+.idea/
+
+# Environment variables
+.env*
+!.env.example
+
+# Metadata
+.metadata
+
+# Temp and build output files
+tmp-*
+temp_*
+tsc-*
+vite-build-output.txt
+verify.bat
+exit-code.txt
+errors.txt
+final-check.bat
+run_checks.bat
+run_tsc.bat
+check-*.bat
+check_ts.bat
+check1.bat
+check2.bat
+
+# Audit and phase reports
+API_INTEGRATION.md
+ARCHITECTURE.md
+COMPLETION_REPORT.md
+PHASE1_4_AUDIT_COMPLETE.md
+PHASE1_4_AUDIT_REPORT.md
+PHASE1_4_SUMMARY.md
+PHASE2_1_REPORT.md
+PHASE_2_1_SUMMARY.txt
+PHASE_4.0.1_REPORT.md
+PROJECT_PLAN.md
+
+# Batch files
+*.bat
+
+# Scraper cache
+src/services/scraping/icheckmovies/*.cache
+
+# Output files
+output.txt
+module-errors.txt
+log-tsc-noemit.txt
