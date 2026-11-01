@@ -1,0 +1,63 @@
+﻿npm : npm notice run frostflix@0.1.0 lint
+At line:1 char:1
++ npm run lint 2>&1 | Out-File -Encoding utf8 lint-audit.txt; "EXIT=$LA ...
++ ~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (npm notice run frostflix@0.1.0 lint:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+npm notice run eslint .
+
+C:\Website\frostflix\src\hooks\use-movie-list-scraping.ts
+   84:13  error  '_last' is assigned a value but never used      @typescript-eslint/no-unused-vars
+   93:13  error  '_last' is assigned a value but never used      @typescript-eslint/no-unused-vars
+   94:13  error  '_allPages' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  122:3   error  'sourceId' is defined but never used            @typescript-eslint/no-unused-vars
+  123:3   error  'movieId' is defined but never used             @typescript-eslint/no-unused-vars
+
+C:\Website\frostflix\src\hooks\use-search-movies-scraping.ts
+  73:13  error  '_last' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  79:13  error  '_last' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  80:13  error  '_allPages' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Website\frostflix\src\hooks\use-trending-scraping.ts
+  74:13  error  '_last' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  80:13  error  '_last' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  81:13  error  '_allPages' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Website\frostflix\src\pages\explore-page.tsx
+  26:9   error  'queryClient' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  41:23  error  'setSearchQuery' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Website\frostflix\src\pages\home-page.tsx
+  26:9  error  'queryClient' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  43:9  error  'kindToQuery' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  64:9  error  'titleMap' is assigned a value but never used     @typescript-eslint/no-unused-vars
+
+C:\Website\frostflix\src\pages\search-page.tsx
+  19:10  error  'useSearchMovies' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Website\frostflix\src\services\scraping\scraper-client.ts
+   32:10  error  'safeParseHtml' is defined but never used             @typescript-eslint/no-unused-vars
+   48:12  error  'error' is defined but never used                     @typescript-eslint/no-unused-vars
+  223:10  error  'extractMoviesFromHtml' is defined but never used     @typescript-eslint/no-unused-vars
+  231:12  error  'error' is defined but never used                     @typescript-eslint/no-unused-vars
+  342:28  error  Unexpected any. Specify a different type              @typescript-eslint/no-explicit-any
+  393:13  error  'text' is assigned a value but never used             @typescript-eslint/no-unused-vars
+  445:28  error  Unexpected any. Specify a different type              @typescript-eslint/no-explicit-any
+  470:3   error  'searchUrl' is never reassigned. Use 'const' instead  prefer-const
+  502:28  error  Unexpected any. Specify a different type              @typescript-eslint/no-explicit-any
+  517:12  error  'error' is defined but never used                     @typescript-eslint/no-unused-vars
+  540:10  error  'withDeduplication' is defined but never used         @typescript-eslint/no-unused-vars
+  545:28  error  Unexpected any. Specify a different type              @typescript-eslint/no-explicit-any
+  545:69  error  Unexpected any. Specify a different type              @typescript-eslint/no-explicit-any
+
+C:\Website\frostflix\src\services\scraping\source-registry.ts
+   12:10  error  'scrapingKeys' is defined but never used         @typescript-eslint/no-unused-vars
+  131:9   error  'wasBlocked' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Website\frostflix\src\services\scraping\sources\source-tvmate\adapter.ts
+   88:9  error  'url' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  122:3  error  'movieId' is defined but never used       @typescript-eslint/no-unused-vars
+
+Γ£û 34 problems (34 errors, 0 warnings)
+

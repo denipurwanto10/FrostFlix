@@ -1,0 +1,26 @@
+{
+  "env": {
+    "browser": true,
+    "es2022": true,
+    "node": true
+  },
+  "extensions": [".js", ".jsx", ".ts", ".tsx"],
+  "ignorePatterns": ["**/*.d.ts"],
+  "languageOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "jsx": "react-jsx"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "react-hooks"
+  ],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-unused-vars": "error",
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/exhaustive-deps": "warn",
+    "no-unused-vars": "warn"
+  }
+}

@@ -7,6 +7,7 @@
  */
 
 import * as React from 'react'
+import { useState } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import {
@@ -17,7 +18,9 @@ import {
 import { movieKeys } from '@/services/scraping/query-keys'
 import { useIsInWatchlist, useWatchlistActions } from '@/hooks/use-watchlist'
 import { Button, buttonVariants } from '@/components/ui/button'
+
 import { Skeleton } from '@/components/ui/skeleton/skeleton'
+import { VideoPlayer } from '@/components/VideoPlayer'
 import {
   ArrowLeftIcon,
   ArrowUpRightIcon,
@@ -29,6 +32,8 @@ import { Reveal, SplitText } from '@/components/motion/reveal'
 import { Tilt } from '@/components/motion/tilt'
 import { formatRuntime } from '@/lib/format'
 import { cn } from '@/lib/utils'
+import { getStreamUrl } from '@/services/archiveApi'
+import { searchPublicDomainMovies } from '@/services/archiveApi'
 
 function BackLink() {
   const navigate = useNavigate()
@@ -121,6 +126,40 @@ export function MovieDetailsPage() {
 
   const saved = useIsInWatchlist(data?.id ?? '')
   const { toggle } = useWatchlistActions()
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [streamUrl, setStreamUrl] = useState<string | null>(null)
+  const [streamType, setStreamType] = useState<'mp4' | 'hls' | null>(null)
+  const [isSearching, setIsSearching] = useState(false)
+
+  const playMovie = async (title: string) => {
+    setIsSearching(true)
+    setIsPlaying(false)
+    setStreamUrl(null)
+    setStreamType(null)
+    try {
+      const results = await searchPublicDomainMovies(title)
+      if (results && results.length > 0) {
+        const firstResult = results[0] as { identifier: string }
+        const identifier = firstResult.identifier
+        if (identifier) {
+          const stream = await getStreamUrl(identifier)
+          setStreamUrl(stream.url)
+          setStreamType(stream.type)
+          setIsPlaying(true)
+        } else {
+          setIsPlaying(false)
+        }
+      } else {
+        // No results - show error message below button
+        setIsPlaying(false)
+      }
+    } catch (err) {
+      console.error('Error playing movie:', err)
+      // Show error message
+    } finally {
+      setIsSearching(false)
+    }
+  }
 
   if (!slug) {
     return (
@@ -137,7 +176,7 @@ export function MovieDetailsPage() {
       <div className="page-enter wrap pb-6 pt-24">
         <BackLink />
         <div className="mx-auto max-w-lg py-24 text-center" role="alert">
-          <p className="font-display text-5xl leading-tight">Couldn’t open this film</p>
+          <p className="font-display text-5xl leading-tight">Couldn't open this film</p>
           <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
             {error ? describeScraperError(error) : 'The film may not be in the catalogue.'}
           </p>
@@ -164,6 +203,18 @@ export function MovieDetailsPage() {
 
       <div className="wrap pb-6 pt-24">
         <BackLink />
+
+        {isPlaying && streamUrl && (
+          <div className="mb-8 rounded-md bg-surface-2 p-6">
+            <h2 className="font-display text-[clamp(2rem,5vw,3rem)] leading-[1.1] mb-4">Playing: {data.title}</h2>
+            <VideoPlayer
+              src={streamUrl}
+              type={streamType || 'mp4'}
+              poster={`https://archive.org/services/img/${data.posterUrl?.split('/').pop() || data.title}`}
+              title={data.title}
+            />
+          </div>
+        )}
 
         <div className="mt-8 grid gap-x-16 gap-y-10 md:grid-cols-[minmax(220px,340px)_1fr] md:items-start">
           {/* Poster */}
@@ -238,6 +289,20 @@ export function MovieDetailsPage() {
                 <BookmarkIcon className="h-4 w-4" filled={saved} />
                 {saved ? 'In your watchlist' : 'Add to watchlist'}
               </Button>
+              <Button
+                size="lg"
+                onClick={() => playMovie(data.title)}
+                className={buttonVariants({ variant: 'ghost', size: 'lg' })}
+              >
+                {isSearching ? (
+                  <div className="flex items-center gap-2">
+                    <span className="animate-spin h-4 w-4 mr-1" />
+                    Memuat...
+                  </div>
+                ) : (
+                  <span className="align-middle">▶ Play</span>
+                )}
+              </Button>
               <a
                 href={data.sourceUrl}
                 target="_blank"
@@ -281,13 +346,12 @@ export function MovieDetailsPage() {
               )}
               {data.dislikes !== null && <Stat label="Dislikes" value={num(data.dislikes)} />}
             </dl></Reveal>
-
-            <p className="mt-12 max-w-xl border-t border-border pt-5 text-xs leading-relaxed text-subtle-foreground">
-              Ratings and votes are IMDb figures republished by iCheckMovies, which
-              doesn’t publish synopses — so there isn’t one here.
-            </p>
-          </div>
+          <p className="mt-12 max-w-xl border-t border-border pt-5 text-xs leading-relaxed text-subtle-foreground">
+            Ratings and votes are IMDb figures republished by iCheckMovies, which
+            doesn't publish synopses — so there isn't one here.
+          </p>
         </div>
+      </div>
       </div>
     </article>
   )

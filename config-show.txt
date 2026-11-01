@@ -1,0 +1,96 @@
+npm notice run frostflix@0.1.0 npx
+npm notice run tsc --showConfig --noEmit -p tsconfig.app.json
+{
+    "compilerOptions": {
+        "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+        "target": "es2023",
+        "lib": [
+            "es2023",
+            "dom",
+            "dom.iterable"
+        ],
+        "module": "esnext",
+        "types": [
+            "vite/client"
+        ],
+        "skipLibCheck": true,
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "verbatimModuleSyntax": false,
+        "moduleDetection": "force",
+        "noEmit": true,
+        "baseUrl": "./src",
+        "jsx": "react-jsx",
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedIndexedAccess": true,
+        "exactOptionalPropertyTypes": true,
+        "noImplicitOverride": true,
+        "forceConsistentCasingInFileNames": true,
+        "ignoreDeprecations": "6.0",
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ]
+        }
+    },
+    "files": [
+        "./src/app.tsx",
+        "./src/main.tsx",
+        "./src/components/common/empty-state/empty-state.tsx",
+        "./src/components/common/empty-state/index.tsx",
+        "./src/components/common/filter-bar/filter-bar.tsx",
+        "./src/components/common/filter-bar/index.tsx",
+        "./src/components/common/genre-filter/genre-filter.tsx",
+        "./src/components/common/genre-filter/index.tsx",
+        "./src/components/common/section-header/index.tsx",
+        "./src/components/common/section-header/section-header.tsx",
+        "./src/components/layout/app-shell.tsx",
+        "./src/components/layout/footer.tsx",
+        "./src/components/layout/index.ts",
+        "./src/components/layout/navbar.tsx",
+        "./src/components/movie/hero-banner/hero-banner.tsx",
+        "./src/components/movie/hero-banner/index.tsx",
+        "./src/components/movie/movie-carousel/index.tsx",
+        "./src/components/movie/movie-carousel/movie-carousel.tsx",
+        "./src/components/movie/movie-grid/index.tsx",
+        "./src/components/movie/movie-grid/movie-grid.tsx",
+        "./src/components/ui/button/button.tsx",
+        "./src/components/ui/button/index.tsx",
+        "./src/components/ui/sheet/index.tsx",
+        "./src/components/ui/sheet/sheet.tsx",
+        "./src/hooks/use-debounced-value.ts",
+        "./src/hooks/use-discover-movies.ts",
+        "./src/hooks/use-genres.ts",
+        "./src/hooks/use-movie-details.ts",
+        "./src/hooks/use-movie-list.ts",
+        "./src/hooks/use-preferences.ts",
+        "./src/hooks/use-search-movies.ts",
+        "./src/hooks/use-trending.ts",
+        "./src/hooks/use-watchlist.ts",
+        "./src/lib/constants.ts",
+        "./src/lib/format.ts",
+        "./src/lib/images.ts",
+        "./src/lib/query-client.ts",
+        "./src/lib/utils.ts",
+        "./src/pages/explore-page.tsx",
+        "./src/pages/home-page.tsx",
+        "./src/pages/movie-details-page.tsx",
+        "./src/pages/not-found-page.tsx",
+        "./src/pages/preferences-page.tsx",
+        "./src/pages/search-page.tsx",
+        "./src/pages/watchlist-page.tsx",
+        "./src/services/tmdb/client.ts",
+        "./src/services/tmdb/config.ts",
+        "./src/services/tmdb/endpoints.ts",
+        "./src/services/tmdb/errors.ts",
+        "./src/services/tmdb/index.ts",
+        "./src/services/tmdb/query-keys.ts",
+        "./src/services/tmdb/types.ts"
+    ],
+    "include": [
+        "src"
+    ]
+}
